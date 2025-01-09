@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 //schema
 const jwtSecreteKey =
   process.env.JWT_SECRET || "ABCDEFHHIJKLMNO@#$%&1234567890";
-console.log("JWTSecretKey", jwtSecreteKey);
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -36,6 +35,7 @@ const userSchema = new mongoose.Schema(
 );
 //middlewares
 userSchema.pre("save", async function () {
+  if (!this.isModified) return;
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });

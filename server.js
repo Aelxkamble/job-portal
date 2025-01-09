@@ -11,6 +11,8 @@ import connectDB from "./config/db.js";
 import testRoutes from "./routes/testRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import errorMiddleware from "./middlewars/errorMiddlewares.js";
+import userRoutes from "./routes/userRoutes.js";
+import jobsRoutes from "./routes/jobsRoutes.js";
 //config
 dotenv.config({ path: "./config" });
 //Mongodb Connection
@@ -26,6 +28,9 @@ app.use(morgan("dev"));
 //routes
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
+
+app.use("/api/v1/job", jobsRoutes);
 
 //validation middleware
 app.use(errorMiddleware);
